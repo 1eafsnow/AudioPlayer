@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Audio VERSION 1.0 LANGUAGES CXX)
+project(AudioPlayer VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -11,12 +11,12 @@ include_directories(${PROJECT_SOURCE_DIR}/src)
 include_directories(${PROJECT_SOURCE_DIR}/3rd/fftw-3.3.5)
 include_directories(${PROJECT_SOURCE_DIR}/3rd/glew-2.2.0/include)
 include_directories(${PROJECT_SOURCE_DIR}/3rd/glfw-3.3.8)
-include_directories(${PROJECT_SOURCE_DIR}/3rd/imgui-docking)
+include_directories(${PROJECT_SOURCE_DIR}/3rd/imgui-1.92.3)
 include_directories(${PROJECT_SOURCE_DIR}/3rd/OpenAL/include)
 
 file(GLOB IMGUI_SRCS CONFIGURE_DEPENDS 
-    ${PROJECT_SOURCE_DIR}/3rd/imgui-docking/*.cpp
-    ${PROJECT_SOURCE_DIR}/3rd/imgui-docking/backends/*.cpp
+    ${PROJECT_SOURCE_DIR}/3rd/imgui-1.92.3/*.cpp
+    ${PROJECT_SOURCE_DIR}/3rd/imgui-1.92.3/backends/*.cpp
 )
 
 file(GLOB SRCS CONFIGURE_DEPENDS 
@@ -48,6 +48,6 @@ endif()
 add_library(imgui STATIC ${IMGUI_SRCS})
 target_link_libraries(imgui PUBLIC opengl glew glfw)
 
-add_executable(Audio ${SRCS})
-target_compile_definitions(Audio PUBLIC SHADER_DIR=${PROJECT_SOURCE_DIR})
-target_link_libraries(Audio fftw openal imgui)
+add_executable(AudioPlayer ${SRCS})
+target_compile_definitions(AudioPlayer PUBLIC SHADER_DIR=${PROJECT_SOURCE_DIR})
+target_link_libraries(AudioPlayer fftw openal imgui)
