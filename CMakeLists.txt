@@ -51,3 +51,15 @@ target_link_libraries(imgui PUBLIC opengl glew glfw)
 add_executable(AudioPlayer ${SRCS})
 target_compile_definitions(AudioPlayer PUBLIC SHADER_DIR=${PROJECT_SOURCE_DIR})
 target_link_libraries(AudioPlayer fftw openal imgui)
+add_custom_command(TARGET AudioPlayer POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/3rd/fftw-3.3.5/libfftw3-3.dll"
+        $<TARGET_FILE_DIR:AudioPlayer>) 
+add_custom_command(TARGET AudioPlayer POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/3rd/glew-2.2.0/lib/glew32.dll"
+        $<TARGET_FILE_DIR:AudioPlayer>) 
+add_custom_command(TARGET AudioPlayer POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/3rd/glfw-3.3.8/glfw3.dll"
+        $<TARGET_FILE_DIR:AudioPlayer>) 
